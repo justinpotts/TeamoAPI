@@ -75,3 +75,8 @@ Sorts players in database by mileTime element
 `curl -i http://localhost:5000/teamo/api/v1.0/players/sort/height`
 
 Sorts players in database by height element
+
+## Build on Teamo API
+Want to build on our API? We use a Java applet as our main service to run with Teamo, but you're welcome to build your own! All you need to do is build the front-end and user input system, pass Teamo API the JSON data, then interpret the response.
+
+You can start from scratch, or fork our build [here](https://github.com/justinpotts/teamo/)!
