@@ -12,6 +12,8 @@ This can be done through `pip install flask`.
 Note: At this point in time, the API is using default test data included with the code. In future versions, 
 you will be able to send your own JSON data through the API.
 
+To start the web server, run `python app.py`, then either access the API through a browser by visiting `http://127.0.0.1:5000/` or using curl from the command line.
+
 ### Stucture
 All JSON data sent to and from the Teamo API will be in the following structure.
 
