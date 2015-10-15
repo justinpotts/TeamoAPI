@@ -9,7 +9,7 @@ The only prerequisite is to have Flask installed.
 This can be done through `pip install flask`.
 
 ## How to Use
-Note: At this point in time, the API is using default test data included with the code. In future versions, 
+Note: At this point in time, the API is using default test data included with the code. In future versions,
 you will be able to send your own JSON data through the API.
 
 To start the web server, run `python app.py`, then either access the API through a browser by visiting `http://127.0.0.1:5000/` or using curl from the command line.
@@ -38,9 +38,9 @@ All JSON data sent to and from the Teamo API will be in the following structure.
 
 `height`: int, user-defined
 
-To make a call to the Teamo API, use any request module to make an API call creating player, passing in 
+To make a call to the Teamo API, use any request module to make an API call creating player, passing in
 JSON data. Make a call to sort one of three ways and Teamo will return the player roster sorted. Only
-make one sort call per instance to avoid errors in sorting. 
+make one sort call per instance to avoid errors in sorting.
 
 ### API Calls
 
@@ -48,7 +48,7 @@ make one sort call per instance to avoid errors in sorting.
 `curl -i http://localhost:5000/teamo/api/v1.0/players`
 
 Returns players in JSON data in structure presented above
-	
+
 #### Get individual player
 `curl -i http://localhost:5000/teamo/api/v1.0/players/<id>`
 
@@ -60,13 +60,9 @@ Returns an individual player with id in JSON data in structure presented above. 
 Creates a player with playerName element. The other elements will be implemented shortly.
 
 #### Sort players by ball control
-Note: This is still in development and currently broken. Patch will be committed soon.
-
 `curl -i http://localhost:5000/teamo/api/v1.0/players/sort/ballControl`
 
 Sorts players in database by ballControl element
-	
-#### Coming soon:
 
 ##### Sort players by mile time
 `curl -i http://localhost:5000/teamo/api/v1.0/players/sort/mileTime`

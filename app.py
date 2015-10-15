@@ -42,6 +42,8 @@ players = [
 ]
 
 playersByBallControl = []
+playersByMileTime = []
+playersByHeight = []
 
 @app.route('/teamo/api/v1.0/players', methods=['GET'])
 def get_players():
@@ -75,6 +77,51 @@ def delete_player(player_id):
         abort(404)
     players.remove(player[0])
     return jsonify({'result': True})
+
+@app.route('/teamo/api/v1.0/players/sort/ballControl', methods=['GET'])
+def sortByBallControl():
+    topPlayer = {}
+    usedPlayerNames = []
+    for player in playersByBallControl:
+        usedPlayerNames.append(player.get('playerName'))
+    for player in players:
+        if player.get('playerName') not in usedPlayerNames:
+            if player.get('ballControl') > topPlayer.get('ballControl'):
+                topPlayer = player
+    playersByBallControl.append(topPlayer)
+    if len(playersByBallControl) < len(players):
+        sortByBallControl()
+    return jsonify({'players':playersByBallControl})
+
+@app.route('/teamo/api/v1.0/players/sort/mileTime', methods=['GET'])
+def sortByMileTime():
+    topPlayer = {}
+    usedPlayerNames = []
+    for player in playersByMileTime:
+        usedPlayerNames.append(player.get('playerName'))
+    for player in players:
+        if player.get('playerName') not in usedPlayerNames:
+            if player.get('mileTime') > topPlayer.get('mileTime'):
+                topPlayer = player
+    playersByMileTime.append(topPlayer)
+    if len(playersByMileTime) < len(players):
+        sortByMileTime()
+    return jsonify({'players':playersByMileTime})
+
+@app.route('/teamo/api/v1.0/players/sort/height', methods=['GET'])
+def sortByHeight():
+    topPlayer = {}
+    usedPlayerNames = []
+    for player in playersByHeight:
+        usedPlayerNames.append(player.get('playerName'))
+    for player in players:
+        if player.get('playerName') not in usedPlayerNames:
+            if player.get('height') > topPlayer.get('height'):
+                topPlayer = player
+    playersByHeight.append(topPlayer)
+    if len(playersByHeight) < len(players):
+        sortByHeight()
+    return jsonify({'players':playersByHeight})
 
 def make_public_player(player):
     new_player = {}
