@@ -45,9 +45,11 @@ playersByBallControl = []
 playersByMileTime = []
 playersByHeight = []
 
+
 @app.route('/teamo/api/v1.0/players', methods=['GET'])
 def get_players():
     return jsonify({'players': [make_public_player(player) for player in players]})
+
 
 @app.route('/teamo/api/v1.0/players/<int:player_id>', methods=['GET'])
 def get_player(player_id):
@@ -56,9 +58,10 @@ def get_player(player_id):
         abort(404)
     return jsonify({'player': player[0]})
 
+
 @app.route('/teamo/api/v1.0/players', methods=['POST'])
 def create_player():
-    if not request.json or not 'playerName' in request.json:
+    if not request.json or 'playerName' not in request.json:
         abort(400)
     player = {
         'id': players[-1]['id'] + 1,
@@ -70,6 +73,7 @@ def create_player():
     players.append(player)
     return jsonify({'player': player}), 201
 
+
 @app.route('/teamo/api/v1.0/players/<int:player_id>', methods=['DELETE'])
 def delete_player(player_id):
     player = [player for player in players if player['id'] == player_id]
@@ -77,6 +81,7 @@ def delete_player(player_id):
         abort(404)
     players.remove(player[0])
     return jsonify({'result': True})
+
 
 @app.route('/teamo/api/v1.0/players/sort/ballControl', methods=['GET'])
 def sortByBallControl():
@@ -91,7 +96,8 @@ def sortByBallControl():
     playersByBallControl.append(topPlayer)
     if len(playersByBallControl) < len(players):
         sortByBallControl()
-    return jsonify({'players':playersByBallControl})
+    return jsonify({'players': playersByBallControl})
+
 
 @app.route('/teamo/api/v1.0/players/sort/mileTime', methods=['GET'])
 def sortByMileTime():
@@ -106,7 +112,8 @@ def sortByMileTime():
     playersByMileTime.append(topPlayer)
     if len(playersByMileTime) < len(players):
         sortByMileTime()
-    return jsonify({'players':playersByMileTime})
+    return jsonify({'players': playersByMileTime})
+
 
 @app.route('/teamo/api/v1.0/players/sort/height', methods=['GET'])
 def sortByHeight():
@@ -121,7 +128,8 @@ def sortByHeight():
     playersByHeight.append(topPlayer)
     if len(playersByHeight) < len(players):
         sortByHeight()
-    return jsonify({'players':playersByHeight})
+    return jsonify({'players': playersByHeight})
+
 
 def make_public_player(player):
     new_player = {}
@@ -132,9 +140,11 @@ def make_public_player(player):
             new_player[field] = player[field]
     return new_player
 
+
 @app.errorhandler(404)
 def not_found(error):
     return make_response(jsonify({'error': 'Not found'}), 404)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
