@@ -64,12 +64,12 @@ Creates a player with playerName element. The other elements will be implemented
 
 Sorts players in database by ballControl element
 
-##### Sort players by mile time
+#### Sort players by mile time
 `curl -i http://localhost:5000/teamo/api/v1.0/players/sort/mileTime`
 
 Sorts players in database by mileTime element
 
-##### Sort players by height
+#### Sort players by height
 `curl -i http://localhost:5000/teamo/api/v1.0/players/sort/height`
 
 Sorts players in database by height element
